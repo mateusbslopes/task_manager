@@ -1,0 +1,12 @@
+{
+  "name": "task-manager-server",
+  "version": "0.1.0",
+  "description": "task-manager-server",
+  "main": "index.js",
+  "repository": "https://github.com/mateusbslopes/task_manager/tree/main/server",
+  "author": "mateusbslopes",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
