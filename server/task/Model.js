@@ -1,25 +1,30 @@
-const pg =  require('pg')
+const pg = require('pg')
 
 class Model {
 
-    constructor() {
+    async getTasks() {
         const { Client } = pg
         this.client = new Client({
             database: 'task_manager'
         })
-        
-    }
-
-    async getTasks() {
+        let result
         await this.client.connect()
-        const result = await this.client.query("SELECT id_tasks, title, description FROM TASKS") 
+        result = await this.client.query("SELECT id_tasks, title, description FROM TASKS")
+
         await this.client.end()
         return result
     }
 
     async getTask(id) {
+        const { Client } = pg
+        this.client = new Client({
+            database: 'task_manager'
+        })
+        let result
         await this.client.connect()
-        const result = await this.client.query("SELECT id_tasks, title, description FROM TASKS WHERE id_tasks = $1", [id]) 
+        result = await this.client.query("SELECT id_tasks, title, description FROM TASKS WHERE id_tasks = $1", [id])
+
+
         await this.client.end()
         return result
     }

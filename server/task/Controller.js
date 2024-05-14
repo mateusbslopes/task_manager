@@ -8,19 +8,19 @@ class TaskController {
 
     registerRoutes(app) {
         app.get('/tasks', (req, res) => this.getTasks(res))
-        app.get('/tasks/:taskId', (req, res) => this.getTask(res, req.params.taskId))
+        app.get('/tasks/:taskId', (req, res) => this.getTask(res, req.params))
     }
     
     async getTasks(res) {
-        const tasks = await this.model.getTasks()
-        res.json({ data: tasks.rows, count: tasks.rowCount })
+        const result = await this.model.getTasks()
+        res.json({ data: result.rows, count: result.rowCount })
     }
 
-    async getTask(res, taskId) {
-        const task = await this.model.getTask(taskId)
+    async getTask(res, { taskId }) {
+        const result = await this.model.getTask(taskId)
         
-        if(task.rowCount)
-            res.json({ data: tasks.rows[0] })
+        if(result.rowCount)
+            res.json({ data: result.rows[0] })
         else {
             res.status(404).send('task not found')
         }
